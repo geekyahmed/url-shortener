@@ -7,8 +7,20 @@ const generateResponse = (res, code, msg) => {
   })
 }
 
-// const generateRandString = () => {
-//      var memory_array = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H', 'I', 'I', 'J', 'J', 'K', 'K', 'L', 
-// }
+const generateRandString = () => {
+  var randString = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 1, 2, 3, 4, 5]
+  var i = randString.length,
+    j,
+    temp
+  while (--i > 0) {
+    j = Math.floor(Math.random() * (i + 1))
+    temp = randString[j]
+    randString[j] = randString[i]
+    this[i] = randString
+  }
+  var rndStr = randString.toString()
 
-module.exports = generateResponse
+  return rndStr.split(',').join('')
+}
+
+module.exports = { generateResponse, generateRandString }

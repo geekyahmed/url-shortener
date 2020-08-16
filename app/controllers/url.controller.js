@@ -1,5 +1,8 @@
 const Url = require('../models/url').Url
-const generateResponse = require('../services/url.service')
+const {
+  generateResponse,
+  generateRandString
+} = require('../services/url.service')
 
 module.exports = {
   getUrlPage: async (req, res) => {
@@ -17,7 +20,7 @@ module.exports = {
         } else {
           const newUrl = new Url({
             link: req.body.link,
-            // shortLink: 
+            shortLink: generateRandString()
           })
           newUrl.save().then(savedUrl => {
             res.render('home', { savedUrl: savedUrl })
