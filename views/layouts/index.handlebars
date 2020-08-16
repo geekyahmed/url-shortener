@@ -37,11 +37,11 @@
         border-radius: 20px;
     }
 
-    .form-box h1 {
+    .form-box h2 {
         text-align: center;
         text-transform: uppercase;
         margin-bottom: 40px;
-        font-size: 42px;
+        font-size: 32px;
         letter-spacing: 2px;
     }
 
@@ -51,20 +51,19 @@
         font-weight: 300;
     }
 
-    #forgot {
+    #url {
         display: block;
         text-align: center;
         margin: 20px;
         font-size: 18px;
     }
 
-    #forgot a {
+    #url a {
         text-decoration: none;
         color: rgb(7, 80, 55);
     }
 
     input[type="text"],
-    input[type="password"],
     input[type="submit"] {
         width: 100%;
         border: none;
@@ -78,11 +77,17 @@
         background: transparent;
     }
 
+    input[type="text"]:focus {
+        box-shadow: inset 7px 7px 17px rgba(70, 70, 70, 0.12);
+    }
 
+    input[type="submit"]:active {
+        box-shadow: inset 7px 7px 17px rgba(70, 70, 70, 0.12);
+    }
 </style>
 
 <body>
-
+    {{{ body }}}
 </body>
 
 </html>
