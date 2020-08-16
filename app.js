@@ -1,6 +1,9 @@
 const express = require('express')
-const exphbs = require('express-handlebars')
+const handlebars = require('express-handlebars').create({
+  defaultLayout: 'index'
+})
 const mongoose = require('mongoose')
+const api = require('./app/routes/index.routes')
 const db = require('./config/db')
 const app = express()
 
@@ -31,12 +34,12 @@ mongoose
     throw new Error('Connection Failed!!')
   })
 
-app.set(
-  'view engine',
-  exphbs({
-    defaultLayout: 'default'
-  })
-)
+//Setup Template Engine
+app.engine('handlebars', handlebars.engine)
+
+app.set('view engine', 'handlebars')
+
+app.use('/', api)
 
 //Start Server
 app.listen(process.env.PORT || 7300, () => {
