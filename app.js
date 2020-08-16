@@ -1,5 +1,5 @@
 const express = require('express')
-const exhbs = require('express-handlebars')
+const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const db = require('./config/db')
 const app = express()
@@ -13,6 +13,7 @@ app.use(
   })
 )
 
+//MongoDB Connection Options
 const opts = {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -29,6 +30,13 @@ mongoose
   .catch(err => {
     throw new Error('Connection Failed!!')
   })
+
+app.set(
+  'view engine',
+  exphbs({
+    defaultLayout: 'default'
+  })
+)
 
 //Start Server
 app.listen(process.env.PORT || 7300, () => {
