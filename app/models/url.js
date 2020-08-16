@@ -6,6 +6,10 @@ const UrlSchema = new Schema({
     type: String,
     required: true
   },
+  shortLink: {
+    type: String,
+    required: true
+  },
   createdAt: {
     type: Date,
     default: Date.now()

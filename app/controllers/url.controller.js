@@ -2,6 +2,9 @@ const Url = require('../models/url').Url
 const generateResponse = require('../services/url.service')
 
 module.exports = {
+  getUrlPage: async (req, res) => {
+    res.render('index')
+  },
   generateShortUrl: async (req, res, next) => {
     try {
       if (req.body.url == '') {
@@ -10,20 +13,14 @@ module.exports = {
 
       await Url.findOne({ link: req.body.link }).then(existingLink => {
         if (existingLink) {
-          generateResponse(res, 200, 'Link already exists!!')
+          generateResponse(res, 201, 'Link already exists!!')
         } else {
           const newUrl = new Url({
-            link: req.body.link
+            link: req.body.link,
+            // shortLink: 
           })
           newUrl.save().then(savedUrl => {
-            return res.status(200).json({
-              code: 200,
-              msg: 'Link have been shortened',
-              data: {
-                link: req.body.link,
-                shortLink: savedUrl.link
-              }
-            })
+            res.render('home', { savedUrl: savedUrl })
           })
         }
       })
