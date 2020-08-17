@@ -7,7 +7,7 @@ const generateResponse = (res, code, msg) => {
   })
 }
 
-const generateRandString = () => {
+const generateRandString = req => {
   var randString = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 1, 2, 3, 4, 5]
   var i = randString.length,
     j,
@@ -20,7 +20,7 @@ const generateRandString = () => {
   }
   var rndStr = randString.toString()
 
-  return rndStr.split(',').join('')
+  return `${req.protocol}://${req.headers.host}/${rndStr.split(',').join('')}`
 }
 
 module.exports = { generateResponse, generateRandString }

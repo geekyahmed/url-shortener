@@ -13,22 +13,18 @@ module.exports = {
       if (req.body.url == '') {
         generateResponse(res, 201, 'No URL is provided')
       }
-
-      await Url.findOne({ link: req.body.link }).then(existingLink => {
-        if (existingLink) {
-          generateResponse(res, 201, 'Link already exists!!')
-        } else {
-          const newUrl = new Url({
-            link: req.body.link,
-            shortLink: generateRandString()
-          })
-          newUrl.save().then(savedUrl => {
-            res.render('home', { savedUrl: savedUrl })
-          })
-        }
+      const newUrl = new Url({
+        link: req.body.link,
+        shortLink: generateRandString(req)
+      })
+      newUrl.save().then(savedUrl => {
+        res.render('url', { savedUrl: savedUrl })
       })
     } catch (error) {
       next(error)
     }
+  },
+  redirectUrl: (req, res) => {
+    
   }
 }
