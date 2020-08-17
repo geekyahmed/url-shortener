@@ -5,7 +5,7 @@ const {
 } = require('../services/url.service')
 
 module.exports = {
-  getUrlPage: async (req, res) => {
+  index: async (req, res) => {
     res.render('index')
   },
   generateShortUrl: async (req, res, next) => {
@@ -14,17 +14,21 @@ module.exports = {
         generateResponse(res, 201, 'No URL is provided')
       }
       const newUrl = new Url({
+        clientIP: getClientIp(req),
         link: req.body.link,
         shortLink: generateRandString(req)
       })
       newUrl.save().then(savedUrl => {
-        res.render('url', { savedUrl: savedUrl })
+        res.redirect('/urls')
       })
     } catch (error) {
       next(error)
     }
   },
-  redirectUrl: (req, res) => {
-    
+  getUrlPage: async (req, res) => {
+    await Url.findOne({ clientIP : getClientIp(req) })
+      .then(urls => {
+        res.render('url', {urls : urls})
+      })
   }
 }

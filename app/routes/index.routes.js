@@ -4,10 +4,9 @@ const api = express.Router()
 
 api
   .route('/')
-  .get(urlController.getUrlPage)
+  .get(urlController.index)
   .post(urlController.generateShortUrl)
 
-// api.route('/url')
-//   .get(urlController)
+api.route('/url').get(urlController.getUrlPage)
 
 module.exports = api

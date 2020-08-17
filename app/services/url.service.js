@@ -1,4 +1,5 @@
 const Url = require('../models/url').Url
+const requestIp = require('request-ip')
 
 const generateResponse = (res, code, msg) => {
   return res.status(code).json({
@@ -23,4 +24,9 @@ const generateRandString = req => {
   return `${req.protocol}://${req.headers.host}/${rndStr.split(',').join('')}`
 }
 
-module.exports = { generateResponse, generateRandString }
+const getClientIp = (req) => {
+  const clientIp = requestIp.getClientIp(req);
+  return clientIp;
+}
+
+module.exports = { generateResponse, generateRandString, getClientIp }
