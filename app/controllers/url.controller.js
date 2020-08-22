@@ -8,7 +8,15 @@ const {
 module.exports = {
   index: async (req, res) => {
     await Url.find({ clientIP: getClientIpAddr(req) }).then(urls => {
-      res.render('index', { urls: urls })
+      return res.status(200).json(
+        urls.map(url => {
+          return {
+            link: url.link,
+            shorten_link: url.shortLink,
+            date: url.date
+          }
+        })
+      )
     })
   },
   generateShortUrl: async (req, res, next) => {
@@ -22,7 +30,10 @@ module.exports = {
         shortLink: generateRandString(req)
       })
       newUrl.save().then(savedUrl => {
-        res.redirect('/')
+        res.status(200).json({
+          msg: 'URL is now shortened',
+          data: savedUrl
+        })
       })
     } catch (error) {
       next(error)
