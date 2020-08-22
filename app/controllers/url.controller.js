@@ -41,17 +41,19 @@ module.exports = {
     }
   },
   redirectUrl: async (req, res, next) => {
-    const id = req.params.shortLink
+    const url = `${req.protocol}://${req.headers.host}/url/${req.params.shortLink}`
     try {
-      const shortLinkUrl = await Url.findOneAndUpdate(
-        { shortLink: id },
+      await Url.findOneAndUpdate(
+        { shortLink: url },
         {
           $inc: {
             views: 1
           }
         }
-      )
-      res.redirect(`${shortLinkUrl.link}`)
+      ).then(shortLinkUrl => {
+        console.log(shortLinkUrl)
+        res.redirect(`${shortLinkUrl.link}`)
+      })
     } catch (err) {
       next(err)
     }
