@@ -14,6 +14,9 @@ const UrlSchema = new Schema({
     type: String,
     required: true
   },
+  views: {
+    type: Number
+  },
   createdAt: {
     type: Date,
     default: Date.now()

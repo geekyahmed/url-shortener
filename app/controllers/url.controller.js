@@ -13,6 +13,7 @@ module.exports = {
           return {
             link: url.link,
             shorten_link: url.shortLink,
+            views: url.views,
             date: url.createdAt
           }
         })
@@ -42,7 +43,14 @@ module.exports = {
   redirectUrl: async (req, res, next) => {
     const id = req.params.shortLink
     try {
-      const shortLinkUrl = await Url.findOne({ shortLink: id })
+      const shortLinkUrl = await Url.findOneAndUpdate(
+        { shortLink: id },
+        {
+          $inc: {
+            views: 1
+          }
+        }
+      )
       res.redirect(`${shortLinkUrl.link}`)
     } catch (err) {
       next(err)
