@@ -7,4 +7,6 @@ api
   .get(urlController.index)
   .post(urlController.generateShortUrl)
 
+api.route('/:shortLink').get(urlController.redirectUrl)
+
 module.exports = api

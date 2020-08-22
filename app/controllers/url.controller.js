@@ -38,5 +38,14 @@ module.exports = {
     } catch (error) {
       next(error)
     }
+  },
+  redirectUrl: async (req, res, next) => {
+    const id = req.params.shortLink
+    try {
+      const shortLinkUrl = await Url.findOne({ shortLink: id })
+      res.redirect(`${shortLinkUrl.link}`)
+    } catch (err) {
+      next(err)
+    }
   }
 }
