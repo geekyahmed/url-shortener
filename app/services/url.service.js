@@ -1,6 +1,7 @@
 const Url = require('../models/url').Url
 const requestIp = require('request-ip')
 
+//Generate Response For Each Request
 const generateResponse = (res, code, msg) => {
   return res.status(code).json({
     code: code,
@@ -8,6 +9,7 @@ const generateResponse = (res, code, msg) => {
   })
 }
 
+//Generate Random String To Shorten URL
 const generateRandString = req => {
   var randString = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 1, 2, 3, 4, 5]
   var i = randString.length,
@@ -26,6 +28,7 @@ const generateRandString = req => {
     .join('')}`
 }
 
+//Get Client IP Address For Each Request
 const getClientIpAddr = req => {
   const clientIp = requestIp.getClientIp(req)
   return clientIp

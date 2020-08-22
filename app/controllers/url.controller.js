@@ -6,6 +6,7 @@ const {
 } = require('../services/url.service')
 
 module.exports = {
+  //Get All URLs In DB
   index: async (req, res) => {
     await Url.find({ clientIP: getClientIpAddr(req) }).then(urls => {
       return res.status(200).json(
@@ -20,6 +21,7 @@ module.exports = {
       )
     })
   },
+  //Save URL Data To DB After Link Is Shorten
   generateShortUrl: async (req, res, next) => {
     try {
       if (req.body.url > 0) {
@@ -40,9 +42,11 @@ module.exports = {
       next(error)
     }
   },
+  //Redirect URL When Clicked
   redirectUrl: async (req, res, next) => {
     const url = `${req.protocol}://${req.headers.host}/url/${req.params.shortLink}`
     try {
+      //Find shorten link and increase counter
       await Url.findOneAndUpdate(
         { shortLink: url },
         {
@@ -51,7 +55,6 @@ module.exports = {
           }
         }
       ).then(shortLinkUrl => {
-        console.log(shortLinkUrl)
         res.redirect(`${shortLinkUrl.link}`)
       })
     } catch (err) {
