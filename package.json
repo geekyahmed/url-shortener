@@ -1,7 +1,7 @@
 {
   "name": "url-shortener",
   "version": "1.0.0",
-  "description": "a system demonstrating a follow and unfollow logic in nodejs",
+  "description": "a url shortener built with node",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
@@ -10,13 +10,9 @@
   "author": "Ahmed Bankole",
   "license": "ISC",
   "dependencies": {
-    "@handlebars/allow-prototype-access": "1.0.3",
     "express": "4.17.1",
-    "express-handlebars": "5.1.0",
     "mongoose": "5.10.0",
     "request-ip": "2.1.3"
   },
-  "devDependencies": {
-    "handlebars": "4.5.0"
-  }
+  "devDependencies": {}
 }
