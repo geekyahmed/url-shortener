@@ -21,7 +21,9 @@ const generateRandString = req => {
   }
   var rndStr = randString.toString()
 
-  return `${req.protocol}://${req.headers.host}/${rndStr.split(',').join('')}`
+  return `${req.protocol}://${req.headers.host}/url/${rndStr
+    .split(',')
+    .join('')}`
 }
 
 const getClientIpAddr = req => {
