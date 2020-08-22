@@ -24,9 +24,9 @@ const generateRandString = req => {
   return `${req.protocol}://${req.headers.host}/${rndStr.split(',').join('')}`
 }
 
-const getClientIp = (req) => {
-  const clientIp = requestIp.getClientIp(req);
-  return clientIp;
+const getClientIpAddr = req => {
+  const clientIp = requestIp.getClientIp(req)
+  return clientIp
 }
 
-module.exports = { generateResponse, generateRandString, getClientIp }
+module.exports = { generateResponse, generateRandString, getClientIpAddr }

@@ -7,6 +7,4 @@ api
   .get(urlController.index)
   .post(urlController.generateShortUrl)
 
-api.route('/url').get(urlController.getUrlPage)
-
 module.exports = api
