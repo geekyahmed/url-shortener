@@ -13,7 +13,7 @@ module.exports = {
           return {
             link: url.link,
             shorten_link: url.shortLink,
-            date: url.date
+            date: url.createdAt
           }
         })
       )
